@@ -296,12 +296,6 @@ from sklearn.model_selection import train_test_split
 # Streamlit web app code
 def main():
     st.title("TastyBytes Food Truck Revenue Trend Forecast")
-    #cnn = snowflake.connector.connect(**st.secrets["snowflake"])
-    @st.cache_resource(show_spinner=False)
-    def get_session():
-        session = Session.builder.configs(st.secrets.["snowflake"]).create()
-        return session
-    session = get_session()
 
     # Predefined lists for truck IDs
     truck_ids = [27, 28, 43, 44, 46, 47]
