@@ -4,5 +4,5 @@ snowflake-snowpark-python
 scikit-learn
 matplotlib
 holidays
-joblib
+joblib==1.2.0
 numpy
