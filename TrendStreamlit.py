@@ -11,8 +11,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 
-
-cnn = snowflake.connector.connect(**st.secrets["snowflake"])
 accountname = 'ex39201.ap-southeast-1'
 username = 'MINH'#getpass.getpass()    # SNOWFLAKE-USERNAME
 password = 'Minh2004'#getpass.getpass()    # SNOWFLAKE-PASSWORD
@@ -298,6 +296,7 @@ from sklearn.model_selection import train_test_split
 # Streamlit web app code
 def main():
     st.title("TastyBytes Food Truck Revenue Trend Forecast")
+    cnn = snowflake.connector.connect(**st.secrets["snowflake"])
 
     # Predefined lists for truck IDs
     truck_ids = [27, 28, 43, 44, 46, 47]
