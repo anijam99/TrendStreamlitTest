@@ -24,6 +24,10 @@ connection_parameters = {
 
 session = Session.builder.configs(connection_parameters).create()
 
+@st.cache_resource(show_spinner=False)
+def get_session():
+    session = Session.builder.configs(st.secrets.["snowflake"]).create()
+    return session
 
 import calendar
 def get_dates(year, month):
