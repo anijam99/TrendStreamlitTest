@@ -1,6 +1,6 @@
 # requirements.txt
 snowflake-connector-python
-snowflake-snowpark-python
+snowflake-snowpark-python==0.7.0
 scikit-learn
 matplotlib
 holidays
