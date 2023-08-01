@@ -4,6 +4,7 @@ import snowflake.snowpark.types as T
 from snowflake.snowpark.window import Window
 from sklearn import preprocessing # https://github.com/Snowflake-Labs/snowpark-python-demos/tree/main/sp4py_utilities
 from snowflake.snowpark.functions import col
+import streamlit as st
 
 import getpass
 import pandas as pd
@@ -26,7 +27,7 @@ session = Session.builder.configs(connection_parameters).create()
 
 @st.cache_resource(show_spinner=False)
 def get_session():
-    session = Session.builder.configs(st.secrets.["snowflake"]).create()
+    session = Session.builder.configs(st.secrets.['snowflake']).create()
     return session
 
 import calendar
@@ -291,8 +292,6 @@ def create_x_holdout_graph(df_predictions):
 import joblib
 xgb = joblib.load('model.joblib')
 
-
-import streamlit as st
 from datetime import timedelta
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
