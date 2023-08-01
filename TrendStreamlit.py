@@ -296,7 +296,12 @@ from sklearn.model_selection import train_test_split
 # Streamlit web app code
 def main():
     st.title("TastyBytes Food Truck Revenue Trend Forecast")
-    cnn = snowflake.connector.connect(**st.secrets["snowflake"])
+    #cnn = snowflake.connector.connect(**st.secrets["snowflake"])
+    @st.cache_resource(show_spinner=False)
+    def get_session():
+        session = Session.builder.configs(st.secrets.["snowflake"]).create()
+        return session
+    session = get_session()
 
     # Predefined lists for truck IDs
     truck_ids = [27, 28, 43, 44, 46, 47]
@@ -367,7 +372,7 @@ def main():
         shift_hours_list = get_shift_hours(start_hour,end_hour,num_of_locs)
         month_value_list = []
         final_df = pd.DataFrame()
-        #session.use_schema("ANALYTICS")
+        session.use_schema("ANALYTICS")
 
         for month in months_list:
             if start_year != end_year:
@@ -376,11 +381,11 @@ def main():
 
             query = 'SELECT * FROM "Trend_Input_Data" WHERE TRUCK_ID = {} AND YEAR = {} AND MONTH = {} AND HOUR IN ({}) AND DOW IN ({});'.format(
                 truck_id, year, month, ', '.join(map(str, hours_list)), ', '.join(map(str, work_days)))
-            #input_data=session.sql(query).to_pandas()
-            cur = cnn.cursor()
+            input_data=session.sql(query).to_pandas()
+            '''cur = cnn.cursor()
             cur.execute(query)
             input_data = cur.fetch_pandas_all()
-            cur.close()
+            cur.close()'''
 
             predict_df = input_data[['TRUCK_ID', 'MONTH', 'HOUR', 'DOW', 'DAY', 'PUBLIC_HOLIDAY', 'LAT', 'LONG', 'LOCATION_ID', 'SUM_DAY_OF_WEEK_AVG_CITY_MENU_TYPE', 'SUM_PREV_YEAR_MONTH_SALES_CITY_MENU_TYPE', 'WEATHERCODE', 'MENU_TYPE_GYROS_ENCODED', 'MENU_TYPE_CREPES_ENCODED', 'MENU_TYPE_BBQ_ENCODED', 'MENU_TYPE_SANDWICHES_ENCODED', 'MENU_TYPE_Mac & Cheese_encoded', 'MENU_TYPE_POUTINE_ENCODED', 'MENU_TYPE_ETHIOPIAN_ENCODED', 'MENU_TYPE_TACOS_ENCODED', 'MENU_TYPE_Ice Cream_encoded', 'MENU_TYPE_Hot Dogs_encoded', 'MENU_TYPE_CHINESE_ENCODED', 'MENU_TYPE_Grilled Cheese_encoded', 'MENU_TYPE_VEGETARIAN_ENCODED', 'MENU_TYPE_INDIAN_ENCODED', 'MENU_TYPE_RAMEN_ENCODED', 'CITY_SEATTLE_ENCODED', 'CITY_DENVER_ENCODED', 'CITY_San Mateo_encoded', 'CITY_New York City_encoded', 'CITY_BOSTON_ENCODED', 'REGION_NY_ENCODED', 'REGION_MA_ENCODED', 'REGION_CO_ENCODED', 'REGION_WA_ENCODED', 'REGION_CA_ENCODED']]
             predict_df['Predicted'] = xgb.predict(predict_df)
@@ -441,12 +446,12 @@ def main():
     if st.button('Show Model Performance'):
 
         # Calculate metrics
-        #session.use_schema("ANALYTICS")
-        #X_final_scaled=session.sql('Select * from "Sales_Forecast_Training_Data";').to_pandas()
-        cur = cnn.cursor()
+        session.use_schema("ANALYTICS")
+        X_final_scaled=session.sql('Select * from "Sales_Forecast_Training_Data";').to_pandas()
+        '''cur = cnn.cursor()
         cur.execute('Select * from "Sales_Forecast_Training_Data";')
         X_final_scaled = cur.fetch_pandas_all()
-        cur.close()
+        cur.close()'''
         X_final_scaled.rename(columns={"Profit": "Revenue"},inplace=True)
 
 
