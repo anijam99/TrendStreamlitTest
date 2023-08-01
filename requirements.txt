@@ -3,3 +3,6 @@ snowflake-connector-python
 snowflake-snowpark-python
 scikit-learn
 matplotlib
+holidays
+joblib
+numpy
