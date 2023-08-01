@@ -1,5 +1,5 @@
 # requirements.txt
 snowflake-connector-python
 snowflake-snowpark-python
-sklearn
-matplotlib
+sklearn-python
+matplotlib-python
