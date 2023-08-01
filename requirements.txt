@@ -6,3 +6,9 @@ matplotlib
 holidays
 joblib==1.2.0
 numpy
+pandas
+xgboost==1.7.5
+plotly
+feature_engine==1.6.0
+folium == 0.14.0
+streamlit-folium
