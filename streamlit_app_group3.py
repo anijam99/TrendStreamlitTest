@@ -1248,12 +1248,11 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 rmse = mean_squared_error(y_true, y_pred, squared=False)
                 '''1'''
                 if selected_model == 'Minh Model':
+                    '''2'''
                     r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
                     '''3'''
                 else:
                     r2 = r2_score(y_true, y_pred)
-                    '''4'''
-                '''2'''
     
                 # Display the performance metrics
                 st.subheader('Model Performance on Holdout data')
