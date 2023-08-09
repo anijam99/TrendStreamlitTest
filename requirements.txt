@@ -1,15 +1,17 @@
 # requirements.txt
-snowflake-connector-python
 snowflake-snowpark-python
-scikit-learn
-matplotlib
-holidays
+snowflake-connector-python
 joblib==1.2.0
-numpy
 pandas
-xgboost==1.7.5
+xgboost==1.7.6
 plotly
 feature_engine==1.6.0
+matplotlib
 folium == 0.14.0
 streamlit-folium
+openrouteservice
 pyarrow==10.0.1
+numpy
+holidays
+scikit-learn
+streamlit_javascript
