@@ -628,7 +628,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 return format_hour(hours_list[0])
             else:
                 start_hour = format_hour(hours_list[0])
-                end_hour = format_hour(hours_list[-1])
+                end_hour = format_hour(hours_list[-1]+1)
                 return f"{start_hour} to {end_hour}"
     
         except Exception as e:
