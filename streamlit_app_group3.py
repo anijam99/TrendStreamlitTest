@@ -1195,6 +1195,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                             print(f"An error occurred while loading the model from the file: {e}")
                     #Trimming Outliers for Holdout Graph
                     X_final_scaled = trim_outliers(X_final_scaled, 'Revenue')
+                    X_final_scaled['Revenue'] = np.log1p(X_final_scaled['Revenue'])
                 elif selected_model == 'Nathan Model':
                     try:
                         model_per = nathan_model
@@ -1246,14 +1247,8 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 mae = mean_absolute_error(y_true, y_pred)
                 mse = mean_squared_error(y_true, y_pred)
                 rmse = mean_squared_error(y_true, y_pred, squared=False)
-                '''1'''
                 if selected_model == 'Minh Model':
-                    '''2'''
-                    try:
-                        r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
-                    except Exception as e:
-                        st.write(f"An error occurred with the streamlit web app: {e}")
-                    '''3'''
+                    r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
                 else:
                     r2 = r2_score(y_true, y_pred)
     
