@@ -1249,7 +1249,10 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 '''1'''
                 if selected_model == 'Minh Model':
                     '''2'''
-                    r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
+                    try:
+                        r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
+                    except Exception as e:
+                        st.write(f"An error occurred with the streamlit web app: {e}")
                     '''3'''
                 else:
                     r2 = r2_score(y_true, y_pred)
