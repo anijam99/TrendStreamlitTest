@@ -1236,6 +1236,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
     
                 # Get feature importance as a DataFrame
                 feature_importance = pd.DataFrame({'Feature': X_final_scaled.drop(columns='Revenue').columns, 'Importance': model_per.feature_importances_})
+                feature_importance = feature_importance.sort_values(by='Importance', ascending=False)
 
                 # Display the feature importance DataFrame
                 st.subheader('Feature Importance')
