@@ -1116,7 +1116,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 for i in range(num_of_locs):
                     current_df = final_df[(final_df['DAY'] == route_date.day) & (final_df['MONTH'] == route_date.month) & (final_df['YEAR'] == route_date.year)].iloc[i]
                     if i == num_of_locs - 1:
-                        shift_hours_list[i].append(shift_hours_list[i][-1] + 1)
+                        shift_hours_list[i].append(shift_hours_list[i][-1])
                     time_range = format_time_range(shift_hours_list[i])
                     st.subheader("Shift: {}".format(str(i+1)))
                     st.write(time_range)
