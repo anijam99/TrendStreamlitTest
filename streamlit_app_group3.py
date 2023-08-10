@@ -1270,8 +1270,10 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                     rmse = mean_squared_error(y_true, y_pred, squared=False)
                     if selected_model == 'Minh Model':
                         r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
+                        result_df = pd.DataFrame({'True Values': np.expm1(y_true), 'Predicted Values': np.expm1(y_pred)})
                     else:
                         r2 = r2_score(y_true, y_pred)
+                        result_df = pd.DataFrame({'True Values': y_true, 'Predicted Values': y_pred})
                         
                 except Exception as e:
                     st.write(f"An error occurred while showing the model performance: {e}")
@@ -1322,7 +1324,6 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 st.image("x_holdout_graph.png", use_column_width=True)
     
                 # Display the true and predicted values in a DataFrame
-                result_df = pd.DataFrame({'True Values': y_true, 'Predicted Values': y_pred})
                 st.subheader('True vs. Predicted Values')
                 st.dataframe(result_df)
         except Exception as e:
