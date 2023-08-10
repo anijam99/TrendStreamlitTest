@@ -836,7 +836,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
             print(f"An error occurred while creating the x_holdout graph: {e}")
     
     try:
-        xgb = group_model
+        xgb = model
     except Exception as e:
             print(f"An error occurred while loading the model: {e}")
     
