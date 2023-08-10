@@ -1225,49 +1225,52 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 X_training, X_holdout, y_training, y_holdout = train_test_split(X, y, test_size=0.2, random_state=42)
                 X_train, X_test, y_train, y_test = train_test_split(X_training, y_training, test_size=0.2, random_state=42)
 
-                # Create a DataFrame with holdout values and predicted values
-                df_predictions = X_holdout.copy()
-                df_predictions['Holdout'] = y_holdout
-                holdout_predictions = model_per.predict(X_holdout)
-                df_predictions['Predicted'] = holdout_predictions
-                train_predictions=model_per.predict(X_train)
-                test_predictions=model_per.predict(X_test)
+                try:
+                    # Create a DataFrame with holdout values and predicted values
+                    df_predictions = X_holdout.copy()
+                    df_predictions['Holdout'] = y_holdout
+                    holdout_predictions = model_per.predict(X_holdout)
+                    df_predictions['Predicted'] = holdout_predictions
+                    train_predictions=model_per.predict(X_train)
+                    test_predictions=model_per.predict(X_test)
+        
+                    # Add a column for the differences
+                    df_predictions['Difference'] = df_predictions['Predicted'] - df_predictions['Holdout']
+        
+                    # Get feature importance as a DataFrame
+                    feature_importance = pd.DataFrame({'Feature': X_final_scaled.drop(columns='Revenue').columns, 'Importance': model_per.feature_importances_})
+                    feature_importance = feature_importance.sort_values(by='Importance', ascending=False)
     
-                # Add a column for the differences
-                df_predictions['Difference'] = df_predictions['Predicted'] - df_predictions['Holdout']
+                    # Display the feature importance DataFrame
+                    st.subheader('Feature Importance')
+                    st.dataframe(feature_importance)
     
-                # Get feature importance as a DataFrame
-                feature_importance = pd.DataFrame({'Feature': X_final_scaled.drop(columns='Revenue').columns, 'Importance': model_per.feature_importances_})
-                feature_importance = feature_importance.sort_values(by='Importance', ascending=False)
-
-                # Display the feature importance DataFrame
-                st.subheader('Feature Importance')
-                st.dataframe(feature_importance)
-
-                # Calculate performance metrics
-                y_true = df_predictions['Holdout']
-                y_pred = df_predictions['Predicted']
-                train_mae = mean_absolute_error(y_train, train_prediction)
-                train_mse = mean_squared_error(y_train, train_prediction)
-                train_rmse = mean_squared_error(y_train, train_prediction, squared=False)
-                if selected_model == 'Minh Model':
-                    train_r2 = r2_score(np.expm1(y_train), np.expm1(train_prediction))
-                else:
-                    train_r2 = r2_score(y_train, train_prediction)
-                test_mae = mean_absolute_error(y_test, test_predictions)
-                test_mse = mean_squared_error(y_test, test_predictions)
-                test_rmse = mean_squared_error(y_test, test_predictions, squared=False)
-                if selected_model == 'Minh Model':
-                    test_r2 = r2_score(np.expm1(y_test), np.expm1(test_predictions))
-                else:
-                    test_r2 = r2_score(y_test, test_predictions)
-                mae = mean_absolute_error(y_true, y_pred)
-                mse = mean_squared_error(y_true, y_pred)
-                rmse = mean_squared_error(y_true, y_pred, squared=False)
-                if selected_model == 'Minh Model':
-                    r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
-                else:
-                    r2 = r2_score(y_true, y_pred)
+                    # Calculate performance metrics
+                    y_true = df_predictions['Holdout']
+                    y_pred = df_predictions['Predicted']
+                    train_mae = mean_absolute_error(y_train, train_prediction)
+                    train_mse = mean_squared_error(y_train, train_prediction)
+                    train_rmse = mean_squared_error(y_train, train_prediction, squared=False)
+                    if selected_model == 'Minh Model':
+                        train_r2 = r2_score(np.expm1(y_train), np.expm1(train_prediction))
+                    else:
+                        train_r2 = r2_score(y_train, train_prediction)
+                    test_mae = mean_absolute_error(y_test, test_predictions)
+                    test_mse = mean_squared_error(y_test, test_predictions)
+                    test_rmse = mean_squared_error(y_test, test_predictions, squared=False)
+                    if selected_model == 'Minh Model':
+                        test_r2 = r2_score(np.expm1(y_test), np.expm1(test_predictions))
+                    else:
+                        test_r2 = r2_score(y_test, test_predictions)
+                    mae = mean_absolute_error(y_true, y_pred)
+                    mse = mean_squared_error(y_true, y_pred)
+                    rmse = mean_squared_error(y_true, y_pred, squared=False)
+                    if selected_model == 'Minh Model':
+                        r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
+                    else:
+                        r2 = r2_score(y_true, y_pred)
+                except Exception as e:
+                    print(f"An error occurred while showing the model performance: {e}")
         
 
                 st.subheader('Model Performance on Training data')
