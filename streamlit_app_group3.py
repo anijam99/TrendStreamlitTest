@@ -1248,6 +1248,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                     # Calculate performance metrics
                     y_true = df_predictions['Holdout']
                     y_pred = df_predictions['Predicted']
+                    
                     train_mae = mean_absolute_error(y_train, train_predictions)
                     train_mse = mean_squared_error(y_train, train_predictions)
                     train_rmse = mean_squared_error(y_train, train_predictions, squared=False)
@@ -1255,6 +1256,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                         train_r2 = r2_score(np.expm1(y_train), np.expm1(train_predictions))
                     else:
                         train_r2 = r2_score(y_train, train_predictions)
+                        
                     test_mae = mean_absolute_error(y_test, test_predictions)
                     test_mse = mean_squared_error(y_test, test_predictions)
                     test_rmse = mean_squared_error(y_test, test_predictions, squared=False)
@@ -1262,6 +1264,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                         test_r2 = r2_score(np.expm1(y_test), np.expm1(test_predictions))
                     else:
                         test_r2 = r2_score(y_test, test_predictions)
+                        
                     mae = mean_absolute_error(y_true, y_pred)
                     mse = mean_squared_error(y_true, y_pred)
                     rmse = mean_squared_error(y_true, y_pred, squared=False)
@@ -1269,28 +1272,48 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                         r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
                     else:
                         r2 = r2_score(y_true, y_pred)
+                        
                 except Exception as e:
                     st.write(f"An error occurred while showing the model performance: {e}")
         
-
-                st.subheader('Model Performance on Training data')
-                st.write(f'Mean Absolute Error (MAE): {train_mae:.2f}')
-                st.write(f'Mean Squared Error (MSE): {train_mse:.2f}')
-                st.write(f'Root Mean Squared Error (RMSE): {train_rmse:.2f}')
-                st.write(f'R-squared (R2) score: {train_r2:.2f}')
-
-                st.subheader('Model Performance on Testing data')
-                st.write(f'Mean Absolute Error (MAE): {test_mae:.2f}')
-                st.write(f'Mean Squared Error (MSE): {test_mse:.2f}')
-                st.write(f'Root Mean Squared Error (RMSE): {test_rmse:.2f}')
-                st.write(f'R-squared (R2) score: {test_r2:.2f}')
+                if selected_model == 'Minh Model':
+                    st.subheader('Model Performance on Training data')
+                    st.write(f'Mean Absolute Error (MAE): {train_mae:.5f}')
+                    st.write(f'Mean Squared Error (MSE): {train_mse:.5f}')
+                    st.write(f'Root Mean Squared Error (RMSE): {train_rmse:.5f}')
+                    st.write(f'R-squared (R2) score: {train_r2:.5f}')
     
-                # Display the performance metrics
-                st.subheader('Model Performance on Holdout data')
-                st.write(f'Mean Absolute Error (MAE): {mae:.2f}')
-                st.write(f'Mean Squared Error (MSE): {mse:.2f}')
-                st.write(f'Root Mean Squared Error (RMSE): {rmse:.2f}')
-                st.write(f'R-squared (R2) score: {r2:.2f}')
+                    st.subheader('Model Performance on Testing data')
+                    st.write(f'Mean Absolute Error (MAE): {test_mae:.5f}')
+                    st.write(f'Mean Squared Error (MSE): {test_mse:.5f}')
+                    st.write(f'Root Mean Squared Error (RMSE): {test_rmse:.5f}')
+                    st.write(f'R-squared (R2) score: {test_r2:.5f}')
+        
+                    # Display the performance metrics
+                    st.subheader('Model Performance on Holdout data')
+                    st.write(f'Mean Absolute Error (MAE): {mae:.5f}')
+                    st.write(f'Mean Squared Error (MSE): {mse:.5f}')
+                    st.write(f'Root Mean Squared Error (RMSE): {rmse:.5f}')
+                    st.write(f'R-squared (R2) score: {r2:.5f}')
+                else:
+                    st.subheader('Model Performance on Training data')
+                    st.write(f'Mean Absolute Error (MAE): {train_mae:.2f}')
+                    st.write(f'Mean Squared Error (MSE): {train_mse:.2f}')
+                    st.write(f'Root Mean Squared Error (RMSE): {train_rmse:.2f}')
+                    st.write(f'R-squared (R2) score: {train_r2:.2f}')
+    
+                    st.subheader('Model Performance on Testing data')
+                    st.write(f'Mean Absolute Error (MAE): {test_mae:.2f}')
+                    st.write(f'Mean Squared Error (MSE): {test_mse:.2f}')
+                    st.write(f'Root Mean Squared Error (RMSE): {test_rmse:.2f}')
+                    st.write(f'R-squared (R2) score: {test_r2:.2f}')
+        
+                    # Display the performance metrics
+                    st.subheader('Model Performance on Holdout data')
+                    st.write(f'Mean Absolute Error (MAE): {mae:.2f}')
+                    st.write(f'Mean Squared Error (MSE): {mse:.2f}')
+                    st.write(f'Root Mean Squared Error (RMSE): {rmse:.2f}')
+                    st.write(f'R-squared (R2) score: {r2:.2f}')
     
                 # Generate and save the holdout vs. predicted graph to an image file
                 create_x_holdout_graph(df_predictions)
