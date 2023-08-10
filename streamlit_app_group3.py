@@ -33,7 +33,7 @@ nathan_model=joblib.load('nathan_model.joblib')
 vibu_model=joblib.load('vibu_model.joblib')
 old_updated_model=joblib.load('updated_old_model.joblib')
 old_model=joblib.load('model.joblib')
-model=minh_model
+model=joblib.load('group_model.joblib')
 connection_parameters = { "account": 'hiioykl-ix77996',"user": 'JAVIER',"password": '02B289223r04', "role": "ACCOUNTADMIN","database": "FROSTBYTE_TASTY_BYTES","warehouse": "COMPUTE_WH"}
 
 session = Session.builder.configs(connection_parameters).create()
