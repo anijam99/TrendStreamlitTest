@@ -1270,7 +1270,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                     else:
                         r2 = r2_score(y_true, y_pred)
                 except Exception as e:
-                    print(f"An error occurred while showing the model performance: {e}")
+                    st.write(f"An error occurred while showing the model performance: {e}")
         
 
                 st.subheader('Model Performance on Training data')
