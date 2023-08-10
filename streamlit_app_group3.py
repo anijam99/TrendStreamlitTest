@@ -39,7 +39,7 @@ connection_parameters = { "account": 'hiioykl-ix77996',"user": 'JAVIER',"passwor
 session = Session.builder.configs(connection_parameters).create()
 
 import plotly.express as px
-st.title('SpeedyBytes 🚚')
+st.title("SpeedyBytes 🚚 - Minh's Model")
 
 list_of_tabs = ["Revenue Forecasting & Model Performance"]
 tabs = st.tabs(list_of_tabs)
