@@ -1143,7 +1143,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
         except Exception as e:
             print(f"An error occurred while processing the data: {e}")
 
-        selected_model = st.selectbox("Select a ML Model to see Performance", ['Old Asg2 Model', 'Updated Asg2 Model (Fixed)', 'Improved Asg3 Model (Main)','Javier Model','Ayrton Model','Minh Model','Nathan Model','Vibu Model'])
+        selected_model = st.selectbox("Select a ML Model to see Performance", ['Old Asg2 Model', 'Updated Asg2 Model (Fixed)', 'Improved Asg3 Group Model (Main)','Javier Model','Ayrton Model','Minh Model','Nathan Model','Vibu Model'])
         try:
             # Create a button to show feature importance and performance
             if st.button('Show Model Performance'):
@@ -1210,7 +1210,7 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                             print(f"An error occurred while loading the model from the file: {e}")
                     #Trimming Outliers for Holdout Graph
                     X_final_scaled = trim_outliers(X_final_scaled, 'Revenue')
-                elif selected_model == 'Improved Asg3 Model (Main)':
+                elif selected_model == 'Improved Asg3 Group Model (Main)':
                     try:
                         model_per = model
                     except Exception as e:
