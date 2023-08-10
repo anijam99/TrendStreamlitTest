@@ -1144,7 +1144,6 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
             print(f"An error occurred while processing the data: {e}")
 
         selected_model = st.selectbox("Select a ML Model to see Performance", ['Old Asg2 Model', 'Updated Asg2 Model (Fixed)', 'Improved Asg3 Group Model (Main)','Javier Model','Ayrton Model','Minh Model','Nathan Model','Vibu Model'])
-        st.write("Due to streamlit's memory, loading the individual models ('Javier Model','Ayrton Model','Minh Model','Nathan Model','Vibu Model') is not possible as it causes the app to crash. Please do not select them here. To view them, go to: https://minhtab3-icp-grp3.streamlit.app/")
         try:
             # Create a button to show feature importance and performance
             if st.button('Show Model Performance'):
