@@ -1224,27 +1224,27 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 # Split the dataset into training and testing datasets
                 X_training, X_holdout, y_training, y_holdout = train_test_split(X, y, test_size=0.2, random_state=42)
                 X_train, X_test, y_train, y_test = train_test_split(X_training, y_training, test_size=0.2, random_state=42)
-    
-                # Create a DataFrame with holdout values and predicted values
-                df_predictions = X_holdout.copy()
-                df_predictions['Holdout'] = y_holdout
-                holdout_predictions = model_per.predict(X_holdout)
-                df_predictions['Predicted'] = holdout_predictions
-                df_predictions['Predicted_Train']=model_per.predict(X_train)
-                df_predictions['Predicted_Test']=model_per.predict(X_test)
-
-                # Add a column for the differences
-                df_predictions['Difference'] = df_predictions['Predicted'] - df_predictions['Holdout']
-    
-                # Get feature importance as a DataFrame
-                feature_importance = pd.DataFrame({'Feature': X_final_scaled.drop(columns='Revenue').columns, 'Importance': model_per.feature_importances_})
-                feature_importance = feature_importance.sort_values(by='Importance', ascending=False)
-
-                # Display the feature importance DataFrame
-                st.subheader('Feature Importance')
-                st.dataframe(feature_importance)
 
                 try:
+                    # Create a DataFrame with holdout values and predicted values
+                    df_predictions = X_holdout.copy()
+                    df_predictions['Holdout'] = y_holdout
+                    holdout_predictions = model_per.predict(X_holdout)
+                    df_predictions['Predicted'] = holdout_predictions
+                    df_predictions['Predicted_Train']=model_per.predict(X_train)
+                    df_predictions['Predicted_Test']=model_per.predict(X_test)
+    
+                    # Add a column for the differences
+                    df_predictions['Difference'] = df_predictions['Predicted'] - df_predictions['Holdout']
+        
+                    # Get feature importance as a DataFrame
+                    feature_importance = pd.DataFrame({'Feature': X_final_scaled.drop(columns='Revenue').columns, 'Importance': model_per.feature_importances_})
+                    feature_importance = feature_importance.sort_values(by='Importance', ascending=False)
+    
+                    # Display the feature importance DataFrame
+                    st.subheader('Feature Importance')
+                    st.dataframe(feature_importance)
+
                     # Calculate performance metrics
                     y_true = df_predictions['Holdout']
                     y_pred = df_predictions['Predicted']
