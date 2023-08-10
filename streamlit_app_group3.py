@@ -1225,12 +1225,12 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 X_training, X_holdout, y_training, y_holdout = train_test_split(X, y, test_size=0.2, random_state=42)
                 X_train, X_test, y_train, y_test = train_test_split(X_training, y_training, test_size=0.2, random_state=42)
 
+                # Create a DataFrame with holdout values and predicted values
+                df_predictions = X_holdout.copy()
+                df_predictions['Holdout'] = y_holdout
+                holdout_predictions = model_per.predict(X_holdout)
+                df_predictions['Predicted'] = holdout_predictions
                 try:
-                    # Create a DataFrame with holdout values and predicted values
-                    df_predictions = X_holdout.copy()
-                    df_predictions['Holdout'] = y_holdout
-                    holdout_predictions = model_per.predict(X_holdout)
-                    df_predictions['Predicted'] = holdout_predictions
                     df_predictions['Predicted_Train']=model_per.predict(X_train)
                     df_predictions['Predicted_Test']=model_per.predict(X_test)
                 except Exception as e:
