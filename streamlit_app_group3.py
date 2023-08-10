@@ -1230,11 +1230,8 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 df_predictions['Holdout'] = y_holdout
                 holdout_predictions = model_per.predict(X_holdout)
                 df_predictions['Predicted'] = holdout_predictions
-                try:
-                    df_predictions['Predicted_Train']=model_per.predict(X_train)
-                    df_predictions['Predicted_Test']=model_per.predict(X_test)
-                except Exception as e:
-                    st.write(f"An error occurred while showing the model performance: {e}")
+                train_predictions=model_per.predict(X_train)
+                test_predictions=model_per.predict(X_test)
     
                 # Add a column for the differences
                 df_predictions['Difference'] = df_predictions['Predicted'] - df_predictions['Holdout']
@@ -1250,20 +1247,20 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 # Calculate performance metrics
                 y_true = df_predictions['Holdout']
                 y_pred = df_predictions['Predicted']
-                train_mae = mean_absolute_error(y_train, df_predictions['Predicted_Train'])
-                train_mse = mean_squared_error(y_train, df_predictions['Predicted_Train'])
-                train_rmse = mean_squared_error(y_train, df_predictions['Predicted_Train'], squared=False)
+                train_mae = mean_absolute_error(y_train, train_prediction)
+                train_mse = mean_squared_error(y_train, train_prediction)
+                train_rmse = mean_squared_error(y_train, train_prediction, squared=False)
                 if selected_model == 'Minh Model':
-                    train_r2 = r2_score(np.expm1(y_train), np.expm1(df_predictions['Predicted_Train']))
+                    train_r2 = r2_score(np.expm1(y_train), np.expm1(train_prediction))
                 else:
-                    train_r2 = r2_score(y_train, df_predictions['Predicted_Train'])
-                test_mae = mean_absolute_error(y_test, df_predictions['Predicted_Test'])
-                test_mse = mean_squared_error(y_test, df_predictions['Predicted_Test'])
-                test_rmse = mean_squared_error(y_test, df_predictions['Predicted_Test'], squared=False)
+                    train_r2 = r2_score(y_train, train_prediction)
+                test_mae = mean_absolute_error(y_test, test_predictions)
+                test_mse = mean_squared_error(y_test, test_predictions)
+                test_rmse = mean_squared_error(y_test, test_predictions, squared=False)
                 if selected_model == 'Minh Model':
-                    test_r2 = r2_score(np.expm1(y_test), np.expm1(df_predictions['Predicted_Test']))
+                    test_r2 = r2_score(np.expm1(y_test), np.expm1(test_predictions))
                 else:
-                    test_r2 = r2_score(y_test, df_predictions['Predicted_Test'])
+                    test_r2 = r2_score(y_test, test_predictions)
                 mae = mean_absolute_error(y_true, y_pred)
                 mse = mean_squared_error(y_true, y_pred)
                 rmse = mean_squared_error(y_true, y_pred, squared=False)
