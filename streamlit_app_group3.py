@@ -25,7 +25,7 @@ from streamlit_javascript import st_javascript
 
 st.set_page_config(layout="wide")
 
-#Loading model and data
+#Loading model and data 
 ayrton_model=joblib.load('ayrton_model.joblib')
 javier_model=joblib.load('javier_model.joblib')
 minh_model=joblib.load('minh_model.joblib')
