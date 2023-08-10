@@ -1241,31 +1241,34 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                 # Display the feature importance DataFrame
                 st.subheader('Feature Importance')
                 st.dataframe(feature_importance)
-    
-                # Calculate performance metrics
-                y_true = df_predictions['Holdout']
-                y_pred = df_predictions['Predicted']
-                train_mae = mean_absolute_error(y_train, y_pred)
-                train_mse = mean_squared_error(y_train, y_pred)
-                train_rmse = mean_squared_error(y_train, y_pred, squared=False)
-                if selected_model == 'Minh Model':
-                    train_r2 = r2_score(np.expm1(y_train), np.expm1(y_pred))
-                else:
-                    train_r2 = r2_score(y_train, y_pred)
-                test_mae = mean_absolute_error(y_test, y_pred)
-                test_mse = mean_squared_error(y_test, y_pred)
-                test_rmse = mean_squared_error(y_test, y_pred, squared=False)
-                if selected_model == 'Minh Model':
-                    test_r2 = r2_score(np.expm1(y_test), np.expm1(y_pred))
-                else:
-                    test_r2 = r2_score(y_test, y_pred)
-                mae = mean_absolute_error(y_true, y_pred)
-                mse = mean_squared_error(y_true, y_pred)
-                rmse = mean_squared_error(y_true, y_pred, squared=False)
-                if selected_model == 'Minh Model':
-                    r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
-                else:
-                    r2 = r2_score(y_true, y_pred)
+
+                try:
+                    # Calculate performance metrics
+                    y_true = df_predictions['Holdout']
+                    y_pred = df_predictions['Predicted']
+                    train_mae = mean_absolute_error(y_train, y_pred)
+                    train_mse = mean_squared_error(y_train, y_pred)
+                    train_rmse = mean_squared_error(y_train, y_pred, squared=False)
+                    if selected_model == 'Minh Model':
+                        train_r2 = r2_score(np.expm1(y_train), np.expm1(y_pred))
+                    else:
+                        train_r2 = r2_score(y_train, y_pred)
+                    test_mae = mean_absolute_error(y_test, y_pred)
+                    test_mse = mean_squared_error(y_test, y_pred)
+                    test_rmse = mean_squared_error(y_test, y_pred, squared=False)
+                    if selected_model == 'Minh Model':
+                        test_r2 = r2_score(np.expm1(y_test), np.expm1(y_pred))
+                    else:
+                        test_r2 = r2_score(y_test, y_pred)
+                    mae = mean_absolute_error(y_true, y_pred)
+                    mse = mean_squared_error(y_true, y_pred)
+                    rmse = mean_squared_error(y_true, y_pred, squared=False)
+                    if selected_model == 'Minh Model':
+                        r2 = r2_score(np.expm1(y_true), np.expm1(y_pred))
+                    else:
+                        r2 = r2_score(y_true, y_pred)
+                except Exception as e:
+                    st.write(f"An error occurred while showing the model performance: {e}")
 
                 st.subheader('Model Performance on Training data')
                 st.write(f'Mean Absolute Error (MAE): {train_mae:.2f}')
