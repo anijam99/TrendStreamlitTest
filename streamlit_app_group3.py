@@ -1248,13 +1248,13 @@ with tabs[0]: #Tran Huy Minh S10223485H Tab Revenue Forecasting & Model Performa
                     # Calculate performance metrics
                     y_true = df_predictions['Holdout']
                     y_pred = df_predictions['Predicted']
-                    train_mae = mean_absolute_error(y_train, train_prediction)
-                    train_mse = mean_squared_error(y_train, train_prediction)
-                    train_rmse = mean_squared_error(y_train, train_prediction, squared=False)
+                    train_mae = mean_absolute_error(y_train, train_predictions)
+                    train_mse = mean_squared_error(y_train, train_predictions)
+                    train_rmse = mean_squared_error(y_train, train_predictions, squared=False)
                     if selected_model == 'Minh Model':
-                        train_r2 = r2_score(np.expm1(y_train), np.expm1(train_prediction))
+                        train_r2 = r2_score(np.expm1(y_train), np.expm1(train_predictions))
                     else:
-                        train_r2 = r2_score(y_train, train_prediction)
+                        train_r2 = r2_score(y_train, train_predictions)
                     test_mae = mean_absolute_error(y_test, test_predictions)
                     test_mse = mean_squared_error(y_test, test_predictions)
                     test_rmse = mean_squared_error(y_test, test_predictions, squared=False)
